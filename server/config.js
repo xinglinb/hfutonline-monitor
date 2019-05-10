@@ -3,11 +3,11 @@ module.exports = {
   port: 3001,
 
   database: {
-    DATABASE: 'hfutonline-prod',
-    USERNAME: 'online',
-    PASSWORD: 'online@hfut',
+    DATABASE: 'hawkeye',
+    USERNAME: 'root',
+    PASSWORD: 'xingli',
     PORT: '3306',
-    HOST: '192.168.1.165',
+    HOST: '127.0.0.1',
   },
 
   cacheTime: 1000 * 60 * 30,

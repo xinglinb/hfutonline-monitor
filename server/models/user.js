@@ -1,7 +1,7 @@
 const dbQuery = require('../utils/db-query');
 
 module.exports = {
-  async getDepartCount() {
+  async login() {
     const sql = `
         select depart_id, department, level,
         count(1) as num
@@ -12,7 +12,7 @@ module.exports = {
     return result;
   },
 
-  async getMajorDetailByDepart(depart_id) {
+  async register() {
     const sql = `
         select major_id, major, level,
         count(1) as num
@@ -20,7 +20,7 @@ module.exports = {
         where depart_id=?
         group by major_id, level
     `;
-    const result = await dbQuery(sql, [depart_id]);
+    const result = await dbQuery(sql, []);
     return result;
   },
 };

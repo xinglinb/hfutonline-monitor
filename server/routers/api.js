@@ -3,11 +3,13 @@
  */
 
 const router = require('koa-router')();
-const apiController = require('../controllers/api/index');
+const performanceController = require('../controllers/performance');
+const errorMoniterController = require('../controllers/errorMoniter');
 
 const routers = router
-  .get('/getDepartCount', apiController.getDepartCount)
-  .get('/getMajorDetailByDepart', apiController.getMajorDetailByDepart);
+  .get('/getPerformanceData', performanceController.getPerformanceData)
+  .get('/getErrorMoniterData', errorMoniterController.getErrorMoniterData)
+  .get('/getDetailErrorMoniterData', errorMoniterController.getDetailErrorMoniterData);
 
 
 module.exports = routers;
