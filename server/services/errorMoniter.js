@@ -32,13 +32,42 @@ module.exports = {
   async getDetailErrorMoniterData(pid, mid) {
     try {
       const errorTypes = await errorMoniterModel.getErrorMoniterTypeByMid(pid, mid);
-      const statData = await errorMoniterModel.getDetailErrorMoniterData(pid, mid);
-
+      const errorDetailList = await errorMoniterModel.getDetailErrorMoniterData(pid, mid);
 
       return {
         errorTypes,
-        statData,
+        errorDetailList,
       };
+    } catch (e) {
+      return e;
+    }
+  },
+
+  async addOrUpdateErrorType({ request }) {
+    try {
+      const pid = 1;
+      const oldMid = request.body.mid;
+      if (!oldMid) {
+        const errorTypes = await errorMoniterModel.getErrorMoniterTypes(pid);
+        const newMid = errorTypes.length;
+        await errorMoniterModel.addErrorType({
+          pid,
+          mid: newMid,
+          ...request.body,
+        });
+        return {
+          mid: newMid,
+        };
+      } else {
+        await errorMoniterModel.updateErrorType({
+          pid,
+          mid: oldMid,
+          ...request.body,
+        });
+        return {
+          mid: oldMid,
+        };
+      }
     } catch (e) {
       return e;
     }

@@ -1,6 +1,11 @@
 const moment = require('moment');
 const reportService = require('../services/report');
 
+// let isPerformanceReporting = false;
+let isErrorReporting = false;
+
+const delay = (time) => new Promise(res => { setTimeout(res, time); });
+
 module.exports = {
 
   async reportPerformanceData(ctx) {
@@ -19,8 +24,15 @@ module.exports = {
   },
 
   async reportErrorData(ctx) {
+    let times = 20;
+    while (isErrorReporting && times > 0) {
+      await delay(10);
+      times -= 1;
+    }
+    isErrorReporting = true;
     const errorDataResult = await reportService.reportErrorData(ctx);
     const errorStatData = await reportService.reportErrorStatData(ctx, errorDataResult);
+    isErrorReporting = false;
     ctx.body = {
       errorDataResult,
       errorStatData,

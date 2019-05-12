@@ -9,6 +9,7 @@ const koaLogger = require('koa-logger');
 const path = require('path');
 
 const cacheMiddleware = require('./middleware/cache');
+const checkLoginMiddleware = require('./middleware/check-login');
 const routers = require('./routers/index');
 const config = require('./config');
 
@@ -37,6 +38,8 @@ app.use(koaStatic(
 app.use(views(path.join(__dirname, './views'), {
   extension: 'ejs',
 }));
+
+app.use(checkLoginMiddleware());
 
 // 初始化路由中间件
 app.use(routers.routes()).use(routers.allowedMethods());

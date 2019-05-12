@@ -16,4 +16,19 @@ module.exports = {
     const result = await userService.register(ctx);
     ctx.body = result;
   },
+
+  async getUserInfo(ctx) {
+    const result = await userService.getUserInfo(ctx);
+    ctx.body = result;
+  },
+
+  async getUsers(ctx) {
+    const result = await userService.getUsers(ctx);
+    ctx.body = result;
+  },
+
+  async updateUserSetting(ctx) {
+    const result = await userService.updateUserSetting(ctx);
+    ctx.body = result;
+  },
 };

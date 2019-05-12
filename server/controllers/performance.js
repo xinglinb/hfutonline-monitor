@@ -5,13 +5,14 @@ const projectService = require('../services/project');
 module.exports = {
 
   async getPerformanceData(ctx) {
-    const { pid, uid } = ctx.request.query;
-    const projectAuth = await projectService.checkProjectAuth(pid, uid);
+    const { pid, user } = ctx.session;
+
+    const projectAuth = await projectService.checkProjectAuth(pid, user.Id);
     if (!projectAuth) {
       ctx.body = {
         code: 403,
         data: '',
-        message: '没有该项目权限',
+        msg: '没有该项目权限',
       };
       return;
     }
@@ -23,7 +24,7 @@ module.exports = {
         statData,
         sevenAvgAllTime,
       },
-      message: '',
+      msg: '',
     };
   },
 
