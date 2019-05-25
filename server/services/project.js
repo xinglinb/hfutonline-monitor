@@ -1,4 +1,5 @@
 const projectModel = require('../models/project');
+const errorMoniterModel = require('../models/errorMoniter');
 
 module.exports = {
   async checkProjectAuth(pid, uid) {
@@ -21,6 +22,18 @@ module.exports = {
         if (members.find(uid => uid === user.Id)) {
           session.pid = insertId;
         }
+        console.log(insertId);
+
+        await errorMoniterModel.addErrorType({
+          pid: insertId,
+          mid: 0,
+          type_name: 'allError',
+          param_one: 'message',
+          param_two: 'stack',
+          param_three: 'res',
+          param_four: 'req',
+          param_five: 'actionType',
+        });
         return {
           pid: insertId,
         };

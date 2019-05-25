@@ -43,9 +43,9 @@ module.exports = {
     }
   },
 
-  async addOrUpdateErrorType({ request }) {
+  async addOrUpdateErrorType({ request, session }) {
     try {
-      const pid = 1;
+      const { pid } = session;
       const oldMid = request.body.mid;
       if (!oldMid) {
         const errorTypes = await errorMoniterModel.getErrorMoniterTypes(pid);

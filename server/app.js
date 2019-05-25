@@ -1,10 +1,11 @@
 const Koa = require('koa');
 const chalk = require('chalk');
-const koaStatic = require('koa-static');
+const staticCache = require('koa-static-cache');
 const bodyParser = require('koa-bodyparser');
 const views = require('koa-views');
 const session = require('koa-session');
 const koaLogger = require('koa-logger');
+const compress = require('koa-compress');
 
 const path = require('path');
 
@@ -29,9 +30,14 @@ app.use(koaLogger());
 // 配置ctx.body解析中间件
 app.use(bodyParser());
 
+app.use(compress(config.compress));
+
 // 配置静态资源加载中间件
-app.use(koaStatic(
-  path.join(__dirname, './../static')
+app.use(staticCache(
+  path.join(__dirname, './../static'),
+  {
+    maxAge: 365 * 24 * 60 * 60,
+  }
 ));
 
 // 配置服务端模板渲染引擎中间件

@@ -80,7 +80,9 @@ module.exports = {
           param_five: moniterParams[moniterParamsName.param_five] || '',
         },
       };
+
       const res = await reportModel.reportErrorData(errorData);
+
       return res;
     } catch (e) {
       return e;

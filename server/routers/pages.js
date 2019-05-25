@@ -8,6 +8,7 @@ const pagesController = require('../controllers/pages');
 const routers = router
   .get('', pagesController.indexPage)
   .get('errorMoniter', pagesController.indexPage)
+  .get('errorDetail/:mid', pagesController.indexPage)
   .get('projectSetting', pagesController.indexPage)
   .get('addProject/projectMessage', pagesController.indexPage)
   .get('addProject/projectSetting', pagesController.indexPage)

@@ -1,6 +1,6 @@
 module.exports = {
 
-  port: 3001,
+  port: 3000,
 
   database: {
     DATABASE: 'hawkeye',
@@ -11,6 +11,10 @@ module.exports = {
   },
 
   cacheTime: 1000 * 60 * 30,
+
+  compress: {
+    threshold: 2048,
+  },
 
   session: {
     key: 'koa:sess',
