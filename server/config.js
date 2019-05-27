@@ -3,7 +3,7 @@ module.exports = {
   port: 3000,
 
   database: {
-    DATABASE: 'hawkeye',
+    DATABASE: 'test',
     USERNAME: 'root',
     PASSWORD: 'xingli',
     PORT: '3306',
